@@ -2,6 +2,10 @@
 using Xamarin.Forms;
 using SmartSaver.Pages;
 using Xamarin.Forms.Xaml;
+using SmartSaver.Models;
+using Newtonsoft.Json;
+using System.Reflection;
+using System.IO;
 
 namespace SmartSaver
 {
@@ -24,6 +28,36 @@ namespace SmartSaver
 
         protected override void OnResume()
         {
+        }
+
+        private static Settings settings;
+
+        public static Settings Settings
+        {
+            get
+            {
+                if (settings == null)
+                    LoadSettings();
+
+                return settings;
+            }
+        }
+
+        private static void LoadSettings()
+        {
+#if RELEASE
+            var settingsResourceStream = Assembly.GetAssembly(typeof(AppSettings)).GetManifestResourceStream("AppSettingsPoC.Configuration.appsettings.release.json");
+#else
+            var settingsResourceStream = Assembly.GetAssembly(typeof(Settings)).GetManifestResourceStream("AppSettingsPoC.Configuration.appsettings.debug.json");
+#endif
+            if (settingsResourceStream == null)
+                return;
+
+            using (var streamReader = new StreamReader(settingsResourceStream))
+            {
+                var jsonString = streamReader.ReadToEnd();
+                settings = JsonConvert.DeserializeObject<Settings>(jsonString);
+            }
         }
     }
 }

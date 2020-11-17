@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Text;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using SmartSaver.Models;
+using Xamarin.Forms.Xaml;
 
 namespace SmartSaver.Pages
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainMenu : MasterDetailPage
     {
         public List<MainMenuItem> MainMenuItems { get; set; }
