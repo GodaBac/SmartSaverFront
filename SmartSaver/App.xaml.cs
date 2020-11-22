@@ -11,6 +11,7 @@ namespace SmartSaver
     public partial class App : Application
     {
         public static User user { get; set; }
+        public static string ownerId { get; set; }
 
         private readonly UserProcessor userProcessor = new UserProcessor();
         public App()

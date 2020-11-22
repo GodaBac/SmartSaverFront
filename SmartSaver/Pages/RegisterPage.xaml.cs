@@ -26,8 +26,7 @@ namespace SmartSaver.Pages
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            NewExpenseDTO data = new NewExpenseDTO { expenseCategory = 3, expenseName = "ledai", moneyUsed = 333, ownerId = "26a39c6d-9709-44a3-8ce7-14e37dc4cfee", userId = "26a39c6d-9709-44a3-8ce7-14e37dc4cfee" };
-            expensesProcessor.AddExpense(data);
+            
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)

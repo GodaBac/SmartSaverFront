@@ -25,7 +25,9 @@ namespace SmartSaver.Pages
             User user = await userProcessor.UserLogin(email.Text, password.Text);
             if (user != null)
             {
-                App.Current.MainPage = new PageOne(user);
+                App.user = user;
+                App.ownerId = user.Userid;
+                App.Current.MainPage = new PageOne();
             }
         }
 
