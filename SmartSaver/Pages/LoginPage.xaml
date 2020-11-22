@@ -8,11 +8,13 @@
 <Label Text="User email" 
             HorizontalOptions="CenterAndExpand"
             Margin="20"/>
-<Entry Placeholder="name@email.com" />
+<Entry  x:Name="email"
+        Placeholder="name@email.com" />
 <Label Text="User Password" 
             HorizontalOptions="CenterAndExpand"
             Margin="20"/>
-<Entry Placeholder="aaaa" />
+<Entry  x:Name="password"
+        Placeholder="aaaa" />
             <Label Text="!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />

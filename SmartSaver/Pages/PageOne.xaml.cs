@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartSaver.DTO.User.Output;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,8 +14,10 @@ namespace SmartSaver.Pages
     [DesignTimeVisible(false)]
     public partial class PageOne : ContentPage
     {
-        public PageOne()
+        User user;
+        public PageOne(User user)
         {
+            this.user = user;
             InitializeComponent();
             this.BindingContext = this;
         }

@@ -42,7 +42,7 @@ namespace SmartSaver.Pages
                 }
                 else if (item.Title.Equals("Expenses"))
                 {
-                    Detail = new NavigationPage(new PageOne());
+                    //Detail = new NavigationPage(new PageOne());
                 }
                 else if (item.Title.Equals("Incomes"))
                 {

@@ -10,7 +10,7 @@ namespace SmartSaver.DTO.Expenses.Input
         public string ownerId { get; set; }
         public string expenseName { get; set; }
         public float moneyUsed { get; set; }
-        public CategoryEnum expenseCategory { get; set; }
+        public int expenseCategory { get; set; }
 
     }
 }
