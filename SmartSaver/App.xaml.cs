@@ -11,7 +11,7 @@ namespace SmartSaver
         {
             InitializeComponent();
 
-            MainPage = new MainMenu();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()
