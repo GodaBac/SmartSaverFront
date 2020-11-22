@@ -1,4 +1,5 @@
-﻿using SmartSaver.DTO.User.Input;
+﻿using SmartSaver.DTO.Expenses.Input;
+using SmartSaver.DTO.User.Input;
 using SmartSaver.Processors;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace SmartSaver.Pages
     public partial class RegisterPage : ContentPage
     {
         private readonly UserProcessor userProcessor = new UserProcessor();
+        private readonly ExpensesProcessor expensesProcessor = new ExpensesProcessor();
         private static readonly HttpClient _client = new HttpClient();
         public RegisterPage()
         {
@@ -23,7 +25,8 @@ namespace SmartSaver.Pages
         }
 
         private void Button_Clicked(object sender, EventArgs e)
-        { 
+        {
+            
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)

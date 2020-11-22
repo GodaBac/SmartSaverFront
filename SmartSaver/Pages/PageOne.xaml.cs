@@ -1,4 +1,5 @@
 ﻿using SmartSaver.DTO.Expenses.Output;
+﻿using SmartSaver.DTO.User.Output;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace SmartSaver.Pages
     [DesignTimeVisible(false)]
     public partial class PageOne : ContentPage
     {
+        User user;
         public PageOne()
         {
             InitializeComponent();

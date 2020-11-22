@@ -6,8 +6,8 @@ namespace SmartSaver.DTO.Goal.Input
 {
     class ModifyAllocatedMoneyDTO
     {
-        public string goalId;
-        public float newAllocatedMoney;
+        public string goalId { get; set; }
+        public float newAllocatedMoney { get; set; }
 
     }
 }
