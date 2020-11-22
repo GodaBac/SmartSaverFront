@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SmartSaver.DTO.Expenses.Output;
+using SmartSaver.Processors;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,31 +14,21 @@ namespace SmartSaver.Pages
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        ExpensesProcessor exp = new ExpensesProcessor();
         public MainPage()
         {
             InitializeComponent();
             this.BindingContext = this;
+            ExpenseData();
         }
 
-        public List<Expense> Expenses { get => ExpenseData(); }
+        public List<ExpenseDTO> Expenses { get; set; }
 
-        private List<Expense> ExpenseData()
+
+        private async void ExpenseData()
         {
-            var tempList = new List<Expense>();
-            tempList.Add(new Expense { Amount = "22.00$", Date = "2020.11.01"});
-            tempList.Add(new Expense { Amount = "300.00$", Date = "2020.11.02"});
-            tempList.Add(new Expense { Amount = "15.32$", Date = "2020.11.03"});
-            tempList.Add(new Expense { Amount = "12.20$", Date = "2020.11.04"});
-            tempList.Add(new Expense { Amount = "17.13$", Date = "2020.11.05"});
-            tempList.Add(new Expense { Amount = "23.23$", Date = "2020.11.05"});
-
-            return tempList;
+            Expenses = await exp.GetExpenses("26a39c6d-9709-44a3-8ce7-14e37dc4cfee", -1, -1);           
         }
     }
 
-    public class Expense
-    {
-        public string Amount { get; set; }
-        public string Date { get; set; }
-    }
 }
