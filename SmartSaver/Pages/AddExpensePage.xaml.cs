@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static SmartSaver.Pages.PageOne;
 
 namespace SmartSaver.Pages
 {
@@ -21,20 +22,25 @@ namespace SmartSaver.Pages
             public int CategoryInt { get; set; }
         }
 
+
         IList<Category> categories;
         public IList<Category> Categories { get { return categories; } }
+        public event NotifyParentDelegate NotifyParentEvent;
         public AddExpensePage()
         {
             InitializeComponent();
+
             exp = new ExpensesProcessor();
             int i = 0;
             categories = new List<Category>();
+
             foreach(var category in Enum.GetNames(typeof(CategoryEnum)))
             {
                 categories.Add(new Category { CategoryName = category, CategoryInt = i });
                 i++;
             }
             expenseCategory.ItemsSource = (System.Collections.IList)categories;
+
 
         }
 
@@ -49,6 +55,10 @@ namespace SmartSaver.Pages
                     {
                         var result = await exp.AddExpense(App.user.Userid, App.ownerId, expenseName.Text, float.Parse(moneyUsed.Text), ((Category)expenseCategory.SelectedItem).CategoryInt);
                         await DisplayAlert("", result, "Ok");
+                        if(result == "Expense added")
+                        {
+                            NotifyParent();
+                        }
 
                     }
                 }
@@ -66,6 +76,16 @@ namespace SmartSaver.Pages
         public void CancelButton_Clicked (object sender, EventArgs args)
         {
             Application.Current.MainPage.Navigation.PopModalAsync();
+        }
+
+
+        public void NotifyParent()
+        {
+            if (NotifyParentEvent != null)
+            {
+                //Raise Event. All the listeners of this event will get a call.
+                NotifyParentEvent();
+            }
         }
 
     }
