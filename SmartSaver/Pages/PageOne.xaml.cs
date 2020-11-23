@@ -17,6 +17,8 @@ namespace SmartSaver.Pages
     [DesignTimeVisible(false)]
     public partial class PageOne : ContentPage
     {
+        public delegate void NotifyParentDelegate();
+
         User user;
         ExpensesProcessor exp;
         ObservableCollection<ExpenseDTO> expenses;
@@ -58,7 +60,31 @@ namespace SmartSaver.Pages
 
         public async void AddButton_Clicked(object sender, EventArgs args)
         {
-            await Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new AddExpensePage()));
+            var addExpensePage = new AddExpensePage();
+            addExpensePage.NotifyParentEvent += new NotifyParentDelegate(_child_NotifyParentEvent);
+            var navAddExpensePage = new NavigationPage(addExpensePage);
+            await Application.Current.MainPage.Navigation.PushModalAsync(navAddExpensePage);
+        }
+
+
+        public async void RemoveButton_Clicked(object sender, EventArgs args)
+        {
+            if(ExpensesList.SelectedItem!=null)
+            {
+                var result = await exp.RemoveExpense(((ExpenseDTO)ExpensesList.SelectedItem).Expenseid);
+                await DisplayAlert("", result, "Ok");
+                ExpenseData();
+            }
+            else
+            {
+                await DisplayAlert("", "Please select an expense to remove", "Ok...");
+            }
+        }
+
+
+        void _child_NotifyParentEvent()
+        {
+            ExpenseData();
         }
 
 
