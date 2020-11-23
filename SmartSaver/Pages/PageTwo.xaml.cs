@@ -33,6 +33,7 @@ namespace SmartSaver.Pages
             int daysToShow = (DateTime.Now - datepicker.Date).Days;
             var _incomes = await inc.GetIncomes(App.ownerId, daysToShow, -1);
             Incomes.Clear();
+            _incomes.Reverse();
             foreach (var income in _incomes)
             {
                 incomes.Add(income);
@@ -44,6 +45,7 @@ namespace SmartSaver.Pages
             
             var _incomes = await inc.GetIncomes(App.ownerId, (DateTime.Now-datepicker.Date).Days, -1);
             incomes.Clear();
+            _incomes.Reverse();
             foreach (var income in _incomes)
             {
                 incomes.Add(income);
