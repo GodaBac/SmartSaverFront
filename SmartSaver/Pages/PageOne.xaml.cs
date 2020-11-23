@@ -1,7 +1,9 @@
 ﻿using SmartSaver.DTO.Expenses.Output;
 ﻿using SmartSaver.DTO.User.Output;
+using SmartSaver.Processors;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -16,16 +18,27 @@ namespace SmartSaver.Pages
     public partial class PageOne : ContentPage
     {
         User user;
+        ExpensesProcessor exp;
+        ObservableCollection<ExpenseDTO> expenses;
+        public ObservableCollection<ExpenseDTO> Expenses { get { return expenses; } }
         public PageOne()
         {
             InitializeComponent();
-            this.BindingContext = this;
+            exp = new ExpensesProcessor();
+            expenses = new ObservableCollection<ExpenseDTO>();
+            ExpensesList.ItemsSource = expenses;
+            ExpenseData();
         }
-        public List<ExpenseDTO> Expenses { get => ExpenseData(); }
 
-        private List<ExpenseDTO> ExpenseData()
+
+        private async void ExpenseData()
         {
-            return new List<ExpenseDTO>();
+            var _expenses = await exp.GetExpenses("26a39c6d-9709-44a3-8ce7-14e37dc4cfee", -1, -1);
+            expenses.Clear();
+            foreach(var expense in _expenses)
+            {
+                expenses.Add(expense);
+            }
         }
 
     }
