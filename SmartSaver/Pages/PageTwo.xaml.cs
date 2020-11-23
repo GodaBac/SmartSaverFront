@@ -1,5 +1,8 @@
-﻿using System;
+﻿using SmartSaver.DTO.Income.Output;
+using SmartSaver.Processors;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -12,31 +15,69 @@ namespace SmartSaver.Pages
     [DesignTimeVisible(false)]
     public partial class PageTwo : ContentPage
     {
+        public delegate void NotifyParentDelegate();
+        IncomeProcessor inc;
+        ObservableCollection<IncomeDTO> incomes;
+        public ObservableCollection<IncomeDTO> Incomes { get { return incomes; } }
         public PageTwo()
         {
             InitializeComponent();
-            this.BindingContext = this;
+            inc = new IncomeProcessor();
+            incomes = new ObservableCollection<IncomeDTO>();
+            IncomesList.ItemsSource = incomes;
+            IncomeData();
         }
 
-        public List<Income> Incomes { get => IncomeData(); }
-
-        private List<Income> IncomeData()
+        private async void IncomeData()
         {
-            var tempList = new List<Income>();
-            tempList.Add(new Income { Amount = "22.00$", Date = "2020.11.01" });
-            tempList.Add(new Income { Amount = "300.00$", Date = "2020.11.02" });
-            tempList.Add(new Income { Amount = "15.32$", Date = "2020.11.03" });
-            tempList.Add(new Income { Amount = "12.20$", Date = "2020.11.04" });
-            tempList.Add(new Income { Amount = "17.13$", Date = "2020.11.05" });
-            tempList.Add(new Income { Amount = "23.23$", Date = "2020.11.05" });
+            int daysToShow = (DateTime.Now - datepicker.Date).Days;
+            var _incomes = await inc.GetIncomes(App.ownerId, daysToShow, -1);
+            Incomes.Clear();
+            foreach (var income in _incomes)
+            {
+                incomes.Add(income);
+            }
+        }
 
-            return tempList;
+        private async void datepicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            
+            var _incomes = await inc.GetIncomes(App.ownerId, (DateTime.Now-datepicker.Date).Days, -1);
+            incomes.Clear();
+            foreach (var income in _incomes)
+            {
+                incomes.Add(income);
+            }
+
+        }
+
+        private async void AddButton_Clicked(object sender, EventArgs e)
+        {
+            
+            var addIncomePage = new AddIncomePage();
+            addIncomePage.NotifyParentEvent += new NotifyParentDelegate(_child_NotifyParentEvent);
+            var navAddExpensePage = new NavigationPage(addIncomePage);
+            await Application.Current.MainPage.Navigation.PushModalAsync(navAddExpensePage);
+        }
+        void _child_NotifyParentEvent()
+        {
+            IncomeData();
+        }
+
+        private async void DeleteButton_Clicked(object sender, EventArgs e)
+        {
+            if (IncomesList.SelectedItem != null)
+            {
+                var result = await inc.DeletIncome(((IncomeDTO)IncomesList.SelectedItem).Incomeid);
+                await DisplayAlert("", "Income deleted", "Ok");
+                IncomeData();
+            }
+            else
+            {
+                await DisplayAlert("", "Please select an expense to remove", "Ok...");
+            }
+
         }
     }
 
-    public class Income
-    {
-        public string Amount { get; set; }
-        public string Date { get; set; }
-    }
 }

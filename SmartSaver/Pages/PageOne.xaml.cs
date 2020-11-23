@@ -17,7 +17,6 @@ namespace SmartSaver.Pages
     [DesignTimeVisible(false)]
     public partial class PageOne : ContentPage
     {
-        User user;
         ExpensesProcessor exp;
         ObservableCollection<ExpenseDTO> expenses;
         public ObservableCollection<ExpenseDTO> Expenses { get { return expenses; } }
@@ -28,7 +27,7 @@ namespace SmartSaver.Pages
             expenses = new ObservableCollection<ExpenseDTO>();
             ExpensesList.ItemsSource = expenses;
             ExpenseData();
-       
+
         }
 
 
@@ -37,7 +36,7 @@ namespace SmartSaver.Pages
             int daysToShow = (DateTime.Now - datepicker.Date).Days;
             var _expenses = await exp.GetExpenses(App.ownerId, daysToShow, -1);
             expenses.Clear();
-            foreach(var expense in _expenses)
+            foreach (var expense in _expenses)
             {
                 expenses.Add(expense);
             }
@@ -49,16 +48,18 @@ namespace SmartSaver.Pages
             var smf = DateTime.Now - datepicker.Date;
             var _expenses = await exp.GetExpenses(App.ownerId, smf.Days, -1);
             expenses.Clear();
-            foreach(var expense in _expenses)
+            foreach (var expense in _expenses)
             {
                 expenses.Add(expense);
             }
         }
 
+        
 
         public async void AddButton_Clicked(object sender, EventArgs args)
         {
             await Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new AddExpensePage()));
+           
         }
 
 

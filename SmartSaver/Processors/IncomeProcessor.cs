@@ -48,7 +48,7 @@ namespace SmartSaver.Processors
 
             try
             {
-                var response = await App.client.GetAsync(String.Format("http://194.5.157.98:88/api/Income/GetAllIncomes?ownerId={0}&numberOfDaysToShow={1}&maxNumberOfExpensesToShow={2}", ownerId, numberOfDaysToShow, maxNumberOfExpensesToShow));
+                var response = await App.client.GetAsync(String.Format("http://194.5.157.98:88/api/Income/GetAllIncomes?ownerId={0}&numberOfDaysToShow={1}&maxNumberOfIncomesToShow={2}", ownerId, numberOfDaysToShow, maxNumberOfExpensesToShow));
                 //var responseInfo = response.GetAwaiter().GetResult();
                 if (response.IsSuccessStatusCode)
                 {
