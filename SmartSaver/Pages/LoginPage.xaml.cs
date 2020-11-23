@@ -20,14 +20,25 @@ namespace SmartSaver.Pages
             InitializeComponent();
         }
 
-        async void loginClick (object sender, EventArgs args)
+        private async void loginClick (object sender, EventArgs args)
         {
-            User user = await userProcessor.UserLogin(email.Text, password.Text);
-            if (user != null)
+            if (email.Text == null || email.Text == "" || password.Text == null || password.Text == "")
             {
-                App.user = user;
-                App.ownerId = user.Userid;
-                App.Current.MainPage = new MainMenu();
+                await DisplayAlert("", "Enter email and password!", "Ok");
+            }
+            else
+            {
+                User user = await userProcessor.UserLogin(email.Text, password.Text);
+                if (user != null)
+                {
+                    App.user = user;
+                    App.ownerId = user.Userid;
+                    App.Current.MainPage = new MainMenu();
+                }
+                else
+                {
+                    await DisplayAlert("", "Email or password is incorrect!", "Ok");
+                }
             }
         }
 

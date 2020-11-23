@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SmartSaver.DTO.User.Input
 {
-    class ModifyUserDTO
+    public class ModifyUserDTO
     {
         public string userId { get; set; }
         public string newUserName { get; set; }
