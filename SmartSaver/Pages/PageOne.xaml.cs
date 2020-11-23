@@ -41,5 +41,13 @@ namespace SmartSaver.Pages
             }
         }
 
+
+
+        public async void AddButton_Clicked(object sender, EventArgs args)
+        {
+            await Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new AddExpensePage()));
+        }
+
+
     }
 }
