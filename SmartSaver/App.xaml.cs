@@ -5,6 +5,7 @@ using Xamarin.Forms.Xaml;
 using SmartSaver.Processors;
 using SmartSaver.DTO.User.Input;
 using SmartSaver.DTO.User.Output;
+using System.Net.Http;
 
 namespace SmartSaver
 {
@@ -12,6 +13,7 @@ namespace SmartSaver
     {
         public static User user { get; set; }
         public static string ownerId { get; set; }
+        public static HttpClient client = new HttpClient();
 
         private readonly UserProcessor userProcessor = new UserProcessor();
         public App()

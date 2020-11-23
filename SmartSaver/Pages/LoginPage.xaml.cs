@@ -27,7 +27,7 @@ namespace SmartSaver.Pages
             {
                 App.user = user;
                 App.ownerId = user.Userid;
-                App.Current.MainPage = new PageOne();
+                App.Current.MainPage = new MainMenu();
             }
         }
 
