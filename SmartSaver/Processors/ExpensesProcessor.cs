@@ -102,6 +102,79 @@ namespace SmartSaver.Processors
 
 
 
+        public async Task<List<SumByOwnerDTO>> GetSumOfExpensesByOwner(string ownerId, string numberOfDaysToShow)
+        {
+            try
+            {
+                var response = await client.GetAsync(String.Format("http://194.5.157.98:88/api/Expenses/GetSumOfExpensesByOwner?ownerId={0}&numberOfDaysToShow={1}", ownerId, numberOfDaysToShow));
+                //var responseInfo = response.GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    List<SumByOwnerDTO> expensesByOwner = JsonConvert.DeserializeObject<List<SumByOwnerDTO>>(responseBody);
+                    if (expensesByOwner != null)
+                    {
+                        return expensesByOwner;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return new List<SumByOwnerDTO>();
+        }
+
+
+
+
+        public async Task<string> RemoveExpense(string expenseId)
+        {
+            try
+            {
+                var response = await client.DeleteAsync(String.Format("http://194.5.157.98:88/api/Expenses/{0}", expenseId));
+                if(response.IsSuccessStatusCode)
+                {
+                    return "Success!";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return "Unexpected error";
+
+        }
+
+
+        public async Task<string> ModifyExpense(string userId, string ownerId, string expenseName, float moneyUsed, int expenseCategory)
+        {
+            NewExpenseDTO data = new NewExpenseDTO { userId = userId, ownerId = ownerId, expenseName = expenseName, moneyUsed = moneyUsed, expenseCategory = expenseCategory };
+            var json = JsonConvert.SerializeObject(data);
+            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                var response = await client.PutAsync("http://194.5.157.98:88/api/Expenses/ModifyExpense", stringContent);
+
+                if (response != null)
+                {
+                    return response.ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return "Unexpected error";
+        }
+
+
     }
 
 }
