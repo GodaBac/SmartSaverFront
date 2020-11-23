@@ -28,12 +28,14 @@ namespace SmartSaver.Pages
             expenses = new ObservableCollection<ExpenseDTO>();
             ExpensesList.ItemsSource = expenses;
             ExpenseData();
+       
         }
 
 
         private async void ExpenseData()
         {
-            var _expenses = await exp.GetExpenses("26a39c6d-9709-44a3-8ce7-14e37dc4cfee", -1, -1);
+            int daysToShow = (DateTime.Now - datepicker.Date).Days;
+            var _expenses = await exp.GetExpenses(App.ownerId, daysToShow, -1);
             expenses.Clear();
             foreach(var expense in _expenses)
             {
@@ -41,5 +43,16 @@ namespace SmartSaver.Pages
             }
         }
 
+        private async void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            var now = DateTime.Now;
+            var smf = DateTime.Now - datepicker.Date;
+            var _expenses = await exp.GetExpenses(App.ownerId, smf.Days, -1);
+            expenses.Clear();
+            foreach(var expense in _expenses)
+            {
+                expenses.Add(expense);
+            }
+        }
     }
 }
