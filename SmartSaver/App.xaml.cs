@@ -14,8 +14,8 @@ namespace SmartSaver
         public static User user { get; set; }
         public static string ownerId { get; set; }
         public static HttpClient client = new HttpClient();
+        public static readonly UserProcessor _userProcessor = new UserProcessor();
 
-        private readonly UserProcessor userProcessor = new UserProcessor();
         public App()
         {
             InitializeComponent();

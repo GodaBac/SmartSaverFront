@@ -14,7 +14,7 @@ namespace SmartSaver.Processors
 
     
 
-    class UserProcessor
+    public class UserProcessor
     {
         private static readonly HttpClient _client = new HttpClient();
 
@@ -23,16 +23,16 @@ namespace SmartSaver.Processors
         //    _client = httpClient;
         //}
 
-        public async Task<string> CreateNewUser(NewUserDTO data)
+        public async Task<bool> CreateNewUser(NewUserDTO data)
         {
             var json = JsonConvert.SerializeObject(data);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await _client.PostAsync("http://194.5.157.98:88/api/User", httpContent);
             if (response.IsSuccessStatusCode)
             {
-                return response.Content.ReadAsStringAsync().Result;
+                return true;
             }
-            return response.Content.ReadAsStringAsync().Result;
+            return false;
         }
 
         public async Task<User> UserLogin(string userEmail, string userPassword)

@@ -4,20 +4,18 @@
              x:Class="SmartSaver.Pages.LoginPage">
     <ContentPage.Content>
         <StackLayout>
-            
-<Label Text="User email" 
+
+            <Label Text="User email" 
             HorizontalOptions="CenterAndExpand"
             Margin="20"/>
-<Entry  x:Name="email"
+            <Entry  x:Name="email"
         Placeholder="name@email.com" />
-<Label Text="User Password" 
+            <Label Text="User Password" 
             HorizontalOptions="CenterAndExpand"
             Margin="20"/>
-<Entry  x:Name="password"
-        Placeholder="aaaa" />
-            <Label Text="!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Entry  x:Name="password"
+                    Placeholder="******" 
+                    IsPassword="True"/>
             <Button Text="Login"
             Clicked="loginClick"/>
             <Button Text="Register"
