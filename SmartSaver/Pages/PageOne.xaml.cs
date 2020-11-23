@@ -81,6 +81,22 @@ namespace SmartSaver.Pages
             }
         }
 
+        public async void ModifyButton_Clicked(object sender, EventArgs args)
+        {
+            
+            if (ExpensesList.SelectedItem != null)
+            {
+                var modifyExpensePage = new ModifyExpensePage((ExpenseDTO)ExpensesList.SelectedItem);
+                modifyExpensePage.NotifyParentEvent += new NotifyParentDelegate(_child_NotifyParentEvent);
+                var navModifyExpensePage = new NavigationPage(modifyExpensePage);
+                await Application.Current.MainPage.Navigation.PushModalAsync(navModifyExpensePage);
+            }
+            else
+            {
+                await DisplayAlert("", "Please select an expense to modify", "Ok!");
+            }
+        }
+
 
         void _child_NotifyParentEvent()
         {

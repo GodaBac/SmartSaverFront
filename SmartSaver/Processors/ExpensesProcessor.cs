@@ -163,7 +163,8 @@ namespace SmartSaver.Processors
 
                 if (response != null)
                 {
-                    return response.ToString();
+                    var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    return responseBody;
                 }
 
             }
