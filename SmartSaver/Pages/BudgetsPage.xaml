@@ -17,50 +17,19 @@
             <Label Text="Budgets" TextColor="Black" FontSize="34" VerticalOptions="Center" HorizontalOptions="Center"/>
         </StackLayout>
         <Frame Grid.Row="1" HasShadow="True" CornerRadius="10" Margin="20,0,20,0" Padding="0" HeightRequest="120" VerticalOptions="Start">
-            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <StackLayout Orientation="Vertical" Spacing="10" HorizontalOptions="CenterAndExpand">
-                    <Button
-                        ImageSource="plus.png"
-                        HeightRequest="70"
-                        VerticalOptions="CenterAndExpand"/>
-                    <StackLayout Spacing="7" HorizontalOptions="CenterAndExpand">
-                        <Label Text="Add" TextColor="Black" FontSize="12" FontAttributes="Bold" HorizontalOptions="Center"/>
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout Grid.Column="1" Orientation="Vertical" Spacing="10" HorizontalOptions="CenterAndExpand">
-                    <Button
-                        ImageSource="delete.png"
-                        HeightRequest="70"
-                        VerticalOptions="CenterAndExpand"/>
-                    <StackLayout Spacing="7" HorizontalOptions="CenterAndExpand">
-                        <Label Text="Delete" TextColor="Black" FontSize="12" FontAttributes="Bold" HorizontalOptions="Center"/>
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout Grid.Column="2" Orientation="Vertical" Spacing="10" HorizontalOptions="CenterAndExpand">
-                    <Button
+
+
+
+            <StackLayout Grid.Column="2" Orientation="Vertical" Spacing="10" HorizontalOptions="CenterAndExpand">
+                <Button
                         ImageSource="modify.png"
                         HeightRequest="70"
-                        VerticalOptions="CenterAndExpand"/>
-                    <StackLayout Spacing="7" HorizontalOptions="CenterAndExpand">
-                        <Label Text="Modify" TextColor="Black" FontSize="12" FontAttributes="Bold" HorizontalOptions="Center"/>
-                    </StackLayout>
+                        VerticalOptions="CenterAndExpand"
+                        Clicked="Button_Clicked"/>
+                <StackLayout Spacing="7" HorizontalOptions="CenterAndExpand">
+                    <Label Text="Modify" TextColor="Black" FontSize="12" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
                 </StackLayout>
-                <StackLayout Grid.Column="3" Orientation="Vertical" Spacing="10" HorizontalOptions="CenterAndExpand">
-                    <Button
-                        ImageSource="chart.png"
-                        HeightRequest="70"
-                        VerticalOptions="CenterAndExpand"/>
-                    <StackLayout Spacing="7" HorizontalOptions="CenterAndExpand">
-                        <Label Text="Progress" TextColor="Black" FontSize="12" FontAttributes="Bold" HorizontalOptions="Center"/>
-                    </StackLayout>
-                </StackLayout>
-            </Grid>
+            </StackLayout>
         </Frame>
         <StackLayout Grid.Row="2" BackgroundColor="Transparent" Orientation="Horizontal" Margin="20" HorizontalOptions="End">
             <Label Text="Your Budgets" TextColor="Black" FontSize="14" HorizontalOptions="EndAndExpand"/>
@@ -70,15 +39,15 @@
             <ListView.ItemTemplate>
                 <DataTemplate >
                     <ViewCell>
-                        <Frame BackgroundColor="White" BorderColor="#F0F0F0" Padding="5" Margin="0,0,0,5" HasShadow="False">
+                        <Frame BackgroundColor="{Binding color}" BorderColor="#F0F0F0" Padding="5" Margin="0,0,0,5" HasShadow="False">
                             <Grid HeightRequest="50" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding Category}" TextColor="Black" FontSize="16" VerticalOptions="Center" Margin="20,0"/>
+                                <Label Text="{Binding category}" TextColor="Black" FontSize="16" VerticalOptions="Center" Margin="20,0"/>
                                 <StackLayout Grid.Column="1" Orientation="Horizontal" Margin="20,0" HorizontalOptions="End" VerticalOptions="Center">
-                                    <Label Text="{Binding BudgetMoney}" TextColor="Black" FontSize="20" FontAttributes="Bold" VerticalOptions="Center"/>
+                                    <Label Text="{Binding NewProperty}" TextColor="Black" FontSize="20" FontAttributes="Bold" VerticalOptions="Center"/>
                                 </StackLayout>
                             </Grid>
                         </Frame>

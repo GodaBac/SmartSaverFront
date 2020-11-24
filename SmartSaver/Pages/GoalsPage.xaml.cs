@@ -1,5 +1,8 @@
-﻿using System;
+﻿using SmartSaver.DTO.Goal.Output;
+using SmartSaver.Processors;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -12,28 +15,31 @@ namespace SmartSaver.Pages
     [DesignTimeVisible(false)]
     public partial class GoalsPage : ContentPage
     {
+        GoalProcessor gop;
+        ObservableCollection<GoalDTO> goals;
+        public ObservableCollection<GoalDTO> Goals { get { return goals; } }
+
         public GoalsPage()
         {
             InitializeComponent();
-            this.BindingContext = this;
+            gop = new GoalProcessor();
+            goals = new ObservableCollection<GoalDTO>();
+            GoalsList.ItemsSource = goals;
+            GoalData();
+            
         }
 
-        public List<Goal> Goals { get => GoalData(); }
-
-        private List<Goal> GoalData()
+       public async void GoalData()
         {
-            var tempList = new List<Goal>();
-            tempList.Add(new Goal { GoalMoneyAllocated = "22.00$", GoalMoney = "100.00$" });
-            tempList.Add(new Goal { GoalMoneyAllocated = "300.00$", GoalMoney = "350.00$" });
-            tempList.Add(new Goal { GoalMoneyAllocated = "15.32$", GoalMoney = "400.00$" });
-
-            return tempList;
+            
+            var _goals = await gop.GetGoals(App.ownerId);
+            goals.Clear();
+            foreach (var goal in _goals)
+            {
+                goals.Add(goal);
+            }
         }
     }
 
-    public class Goal
-    {
-        public string GoalMoney { get; set; }
-        public string GoalMoneyAllocated { get; set; }
-    }
+   
 }

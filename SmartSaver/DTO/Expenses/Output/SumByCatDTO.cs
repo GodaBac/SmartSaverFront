@@ -6,7 +6,7 @@ namespace SmartSaver.DTO.Expenses.Input
 {
     class SumByCatDTO
     {
-        public double sum { get; set; }
+        public float sum { get; set; }
         public string category { get; set; }
 
     }
