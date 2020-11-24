@@ -77,12 +77,12 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding GoalMoneyAllocated}" TextColor="Black" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" Margin="20,0"/>
+                                <Label Text="{Binding Moneyallocated}" TextColor="Black" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" Margin="20,0"/>
                                 <StackLayout Grid.Column="1" Orientation="Horizontal" Margin="20,0">
                                     <Label Text=" out of" TextColor="Black" FontSize="20" FontAttributes="Bold" VerticalOptions="Center"/>
                                 </StackLayout>
                                 <StackLayout Grid.Column="2" Orientation="Horizontal" Margin="20,0" HorizontalOptions="End" VerticalOptions="Center">
-                                    <Label Text="{Binding GoalMoney}" TextColor="Black" FontSize="20" FontAttributes="Bold" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Moneyrequired}" TextColor="Black" FontSize="20" FontAttributes="Bold" VerticalOptions="Center"/>
                                 </StackLayout>
                             </Grid>
                         </Frame>

@@ -58,15 +58,12 @@ namespace SmartSaver.Pages
             
             var addIncomePage = new AddIncomePage();
             addIncomePage.NotifyParentEvent += new NotifyParentDelegate(_child_NotifyParentEvent);
-            var navAddExpensePage = new NavigationPage(addIncomePage);
-            await Application.Current.MainPage.Navigation.PushModalAsync(navAddExpensePage);
+            var navAddIncomePage = new NavigationPage(addIncomePage);
+            await Application.Current.MainPage.Navigation.PushModalAsync(navAddIncomePage);
         }
-        void _child_NotifyParentEvent()
-        {
-            IncomeData();
-        }
+    
 
-        private async void DeleteButton_Clicked(object sender, EventArgs e)
+        public async void RemoveButton_Clicked(object sender, EventArgs args)
         {
             if (IncomesList.SelectedItem != null)
             {
@@ -78,8 +75,28 @@ namespace SmartSaver.Pages
             {
                 await DisplayAlert("", "Please select an expense to remove", "Ok...");
             }
-
         }
+
+        public async void ModifyButton_Clicked(object sender, EventArgs args)
+        {
+
+            if (IncomesList.SelectedItem != null)
+            {
+                var modifyIncomePage = new ModifyIncomePage((IncomeDTO)IncomesList.SelectedItem);
+                modifyIncomePage.NotifyParentEvent += new NotifyParentDelegate(_child_NotifyParentEvent);
+                var navModifyExpensePage = new NavigationPage(modifyIncomePage);
+                await Application.Current.MainPage.Navigation.PushModalAsync(navModifyExpensePage);
+            }
+            else
+            {
+                await DisplayAlert("", "Please select an income to modify", "Ok!");
+            }
+        }
+        void _child_NotifyParentEvent()
+        {
+            IncomeData();
+        }
+
     }
 
 }

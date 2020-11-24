@@ -40,7 +40,7 @@
                         ImageSource="delete.png"
                         HeightRequest="70"
                         VerticalOptions="CenterAndExpand"
-                        Clicked="DeleteButton_Clicked"/>
+                        Clicked="RemoveButton_Clicked"/>
                     <StackLayout Spacing="7" HorizontalOptions="CenterAndExpand">
                         <Label Text="Delete" TextColor="Black" FontSize="12" FontAttributes="Bold" HorizontalOptions="Center"/>
                     </StackLayout>
@@ -49,7 +49,8 @@
                     <Button
                         ImageSource="modify.png"
                         HeightRequest="70"
-                        VerticalOptions="CenterAndExpand"/>
+                        VerticalOptions="CenterAndExpand"
+                        Clicked="ModifyButton_Clicked"/>
                     <StackLayout Spacing="7" HorizontalOptions="CenterAndExpand">
                         <Label Text="Modify" TextColor="Black" FontSize="12" FontAttributes="Bold" HorizontalOptions="Center"/>
                     </StackLayout>
