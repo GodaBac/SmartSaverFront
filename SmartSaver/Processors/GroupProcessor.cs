@@ -28,7 +28,7 @@ namespace SmartSaver.Processors
 
             try
             {
-                var response = await client.PutAsync("http://194.5.157.98:88/api/Group/AddUsereToGroup", stringContent);
+                var response = await client.PutAsync("http://194.5.157.98:88/api/Group/AddUserToGroup", stringContent);
 
                 if (response != null)
                 {

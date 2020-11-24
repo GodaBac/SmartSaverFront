@@ -19,7 +19,6 @@ namespace SmartSaver.Pages
     {
         public delegate void NotifyParentDelegate();
 
-        User user;
         ExpensesProcessor exp;
         ObservableCollection<ExpenseDTO> expenses;
         public ObservableCollection<ExpenseDTO> Expenses { get { return expenses; } }
