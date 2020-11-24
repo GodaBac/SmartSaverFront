@@ -19,12 +19,14 @@ namespace SmartSaver.Pages
     {
         IncomeProcessor inc = new IncomeProcessor();
         public event NotifyParentDelegate NotifyParentEvent;
+        private readonly string incomeId;
 
         public ModifyIncomePage(IncomeDTO selectedItem)
         {
             InitializeComponent();
             this.modMoneirecieved.Text = (selectedItem.Moneyrecieved).ToString();
             this.modIncomename.Text = selectedItem.Incomename;
+            incomeId = selectedItem.Incomeid;
 
         }
 
@@ -37,10 +39,9 @@ namespace SmartSaver.Pages
             {
                 if (string.IsNullOrEmpty(modIncomename.Text) == false)
                 {
-                    var result = await inc.ModifyIncome(new NewIncomeDTO
+                    var result = await inc.ModifyIncome(new ModifyIncomeDTO
                     {
-                        userId = App.user.Userid,
-                        ownerId = App.ownerId,
+                        incomeId = incomeId,
                         incomeName = modIncomename.Text,
                         moneyReceived = float.Parse(modMoneirecieved.Text),
 

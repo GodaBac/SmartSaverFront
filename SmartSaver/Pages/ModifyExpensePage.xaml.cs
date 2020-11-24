@@ -19,10 +19,12 @@ namespace SmartSaver.Pages
         ExpensesProcessor exp = new ExpensesProcessor();
         public event NotifyParentDelegate NotifyParentEvent;
         IList<Category> categories;
+        private readonly string expenseId;
         public IList<Category> Categories { get { return categories; } }
         public ModifyExpensePage(ExpenseDTO selectedItem)
         {
             InitializeComponent();
+            expenseId = selectedItem.Expenseid;
             int i = 0;
             categories = new List<Category>();
 
@@ -48,7 +50,7 @@ namespace SmartSaver.Pages
                 {
                     if (string.IsNullOrEmpty(modMoneyUsed.Text) == false)
                     {
-                        var result = await exp.ModifyExpense(App.user.Userid, App.ownerId, modExpenseName.Text, float.Parse(modMoneyUsed.Text), ((Category)modExpenseCategory.SelectedItem).CategoryInt);
+                        var result = await exp.ModifyExpense(expenseId, modExpenseName.Text, float.Parse(modMoneyUsed.Text), ((Category)modExpenseCategory.SelectedItem).CategoryInt);
                         await DisplayAlert("", "Expense modified", "Ok");
                         NotifyParent();
 

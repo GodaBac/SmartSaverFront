@@ -76,7 +76,7 @@ namespace SmartSaver.Processors
         }
 
 
-        public async Task<List<SumByCatDTO>> GetSumOfExpensesByCategory(string ownerId, string numberOfDaysToShow)
+        public async Task<List<SumByCatDTO>> GetSumOfExpensesByCategory(string ownerId, int numberOfDaysToShow)
         {
             try
             {
@@ -151,9 +151,9 @@ namespace SmartSaver.Processors
         }
 
 
-        public async Task<string> ModifyExpense(string userId, string ownerId, string expenseName, float moneyUsed, int expenseCategory)
+        public async Task<string> ModifyExpense(string expenseId, string expenseName, float moneyUsed, int expenseCategory)
         {
-            NewExpenseDTO data = new NewExpenseDTO { userId = userId, ownerId = ownerId, expenseName = expenseName, moneyUsed = moneyUsed, expenseCategory = expenseCategory };
+            ModifyExpenseDTO data = new ModifyExpenseDTO {expenseId = expenseId, expenseName = expenseName, moneyUsed = moneyUsed, expenseCategory = expenseCategory };
             var json = JsonConvert.SerializeObject(data);
             var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
 

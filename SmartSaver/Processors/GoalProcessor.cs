@@ -26,7 +26,7 @@ namespace SmartSaver.Processors
 
         public async Task<bool> DeleteGoal(string goalId)
         {
-            string url = string.Format("http://194.5.157.98:88/api/User/{0}", goalId);
+            string url = string.Format("http://194.5.157.98:88/api/Goal/{0}", goalId);
             var response = await App.client.DeleteAsync(url);
             if (response.IsSuccessStatusCode)
             {
@@ -51,7 +51,7 @@ namespace SmartSaver.Processors
         {
             var json = JsonConvert.SerializeObject(data);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await App.client.PostAsync("http://194.5.157.98:88/api/User", httpContent);
+            var response = await App.client.PostAsync("http://194.5.157.98:88/api/Goal", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return true;

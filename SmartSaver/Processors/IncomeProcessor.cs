@@ -32,7 +32,7 @@ namespace SmartSaver.Processors
             }
             return false;
         }
-        public async Task<bool> ModifyIncome(NewIncomeDTO data)
+        public async Task<bool> ModifyIncome(ModifyIncomeDTO data)
         {
             string json = JsonConvert.SerializeObject(data);
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, "http://194.5.157.98:88/api/Income");
