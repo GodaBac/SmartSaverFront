@@ -97,6 +97,11 @@ namespace SmartSaver.Pages
         }
 
 
+        public async void ChartsButton_Clicked(object sender, EventArgs args)
+        {
+            await Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new ExpenseChartPage()));
+        }
+
         void _child_NotifyParentEvent()
         {
             ExpenseData();

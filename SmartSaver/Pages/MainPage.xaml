@@ -20,12 +20,12 @@
                 <Label Text="Achieve all your financial goals" TextColor="Black" FontSize="12" HorizontalOptions="Center"/>
             </StackLayout>
             <Frame Grid.Row="1" HasShadow="True" CornerRadius="10" Margin="20,-40,20,0" Padding="0" HeightRequest="120" VerticalOptions="Start">
-            <Label Text=" Your Money : 623.56$" TextColor="Black" FontSize="20" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+            <Label x:Name="yourMoney" Text="Your money: $}" TextColor="Black" FontSize="20" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
         </Frame>
             <StackLayout Grid.Row="2" BackgroundColor="Transparent" Orientation="Horizontal" Margin="20" HorizontalOptions="End">
                 <Label Text="Expenses in the last 10 days" TextColor="Black" FontSize="14" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
-            <ListView x:Name="WeatherForecastList" ItemsSource="{Binding Expenses}" SeparatorVisibility="None"
+            <ListView x:Name="lastFiveExpenses" ItemsSource="{Binding Expenses}" SeparatorVisibility="None"
                   Grid.Row="3" Margin="20,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate >
@@ -36,9 +36,9 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Text="{Binding expenseTime}" TextColor="#757575" FontSize="12" VerticalOptions="Center" Margin="20,0"/>
+                                    <Label Text="{Binding Expensetime}" TextColor="#757575" FontSize="12" VerticalOptions="Center" Margin="20,0"/>
                                     <StackLayout Grid.Column="1" Orientation="Horizontal" Margin="20,0" HorizontalOptions="End" VerticalOptions="Center">
-                                        <Label Text="{Binding moneyUsed}" TextColor="Black" FontSize="20" FontAttributes="Bold" VerticalOptions="Center"/>
+                                        <Label Text="{Binding Moneyused}" TextColor="Black" FontSize="20" FontAttributes="Bold" VerticalOptions="Center"/>
                                     </StackLayout>
                                 </Grid>
                             </Frame>
@@ -46,6 +46,27 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </Grid>
+        <ListView x:Name="lastFiveIncomes" ItemsSource="{Binding Incomes}" SeparatorVisibility="None"
+                  Grid.Row="3" Margin="20,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <ViewCell>
+                        <Frame BackgroundColor="White" BorderColor="#F0F0F0" Padding="5" Margin="0,0,0,5" HasShadow="False">
+                            <Grid HeightRequest="50" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding Incometime}" TextColor="#757575" FontSize="12" VerticalOptions="Center" Margin="20,0"/>
+                                <StackLayout Grid.Column="1" Orientation="Horizontal" Margin="20,0" HorizontalOptions="End" VerticalOptions="Center">
+                                    <Label Text="{Binding Moneyreceived}" TextColor="Black" FontSize="20" FontAttributes="Bold" VerticalOptions="Center"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 
     </ContentPage>

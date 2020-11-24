@@ -59,7 +59,8 @@
                     <Button
                         ImageSource="chart.png"
                         HeightRequest="70"
-                        VerticalOptions="CenterAndExpand"/>
+                        VerticalOptions="CenterAndExpand"
+                        Clicked="ChartsButton_Clicked"/>
                     <StackLayout Spacing="7" HorizontalOptions="CenterAndExpand">
                         <Label Text="Progress" TextColor="Black" FontSize="12" FontAttributes="Bold" HorizontalOptions="Center"/>
                     </StackLayout>

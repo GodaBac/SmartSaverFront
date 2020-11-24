@@ -76,7 +76,7 @@ namespace SmartSaver.Processors
         }
 
 
-        public async Task<List<SumByCatDTO>> GetSumOfExpensesByCategory(string ownerId, string numberOfDaysToShow)
+        public async Task<List<SumByCatDTO>> GetSumOfExpensesByCategory(string ownerId, int numberOfDaysToShow)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace SmartSaver.Processors
 
 
 
-        public async Task<List<SumByOwnerDTO>> GetSumOfExpensesByOwner(string ownerId, string numberOfDaysToShow)
+        public async Task<List<SumByOwnerDTO>> GetSumOfExpensesByOwner(string ownerId, int numberOfDaysToShow)
         {
             try
             {
