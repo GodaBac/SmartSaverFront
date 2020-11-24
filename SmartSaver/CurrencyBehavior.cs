@@ -19,7 +19,7 @@ namespace SmartSaver
 		private void EntryOnUnfocused(object sender, FocusEventArgs e)
 		{
 			var entry = sender as Entry;
-			if (entry?.Text.Length == 0)
+			if (entry?.Text.Length == 0 || string.IsNullOrEmpty(entry?.Text))
 			{
 				entry.Text = "0.00";
 			}
