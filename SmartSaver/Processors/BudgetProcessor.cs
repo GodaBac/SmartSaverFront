@@ -33,10 +33,12 @@ namespace SmartSaver.Processors
                     }
                 }
 
+                response.EnsureSuccessStatusCode();
+
             }
             catch (Exception ex)
             {
-                throw ex;
+                Logger.Log(string.Format("BudgetGetLimits: {0}", ex.ToString()));
             }
 
             return new List<SingleBudgetDTO>();
@@ -53,16 +55,16 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await client.PutAsync("http://194.5.157.98:88/api/Budget/ModifyBudget", stringContent);
-
+                response.EnsureSuccessStatusCode();
                 if (response != null)
-                {
-                    return response.ToString();
-                }
+                return response.ToString();
+
+                
 
             }
             catch (Exception ex)
             {
-                throw ex;
+                Logger.Log(string.Format("ModifyBudget: {0}", ex.ToString()));               
             }
 
             return "Unexpected error";
