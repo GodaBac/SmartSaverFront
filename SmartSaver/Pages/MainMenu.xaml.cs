@@ -22,7 +22,8 @@ namespace SmartSaver.Pages
                 new MainMenuItem() { Title = "Incomes", Icon = "incomes.png", TargetType = typeof(PageTwo) },
                 new MainMenuItem() { Title = "Goals", Icon = "goals.png", TargetType = typeof(GoalsPage) },
                 new MainMenuItem() { Title = "Budgets", Icon = "budgets.png", TargetType = typeof(BudgetsPage) },
-                new MainMenuItem() { Title = "Groups", Icon = "budgets.png", TargetType = typeof(GroupPage) }
+                new MainMenuItem() { Title = "Groups", Icon = "budgets.png", TargetType = typeof(GroupPage) },
+                new MainMenuItem() { Title = "Logs", Icon = "budgets.png", TargetType = typeof(LogsPage)}
             };
 
             // Set the default page, this is the "home" page.
@@ -60,6 +61,10 @@ namespace SmartSaver.Pages
                 else if (item.Title.Equals("Groups"))
                 {
                     Detail = new NavigationPage(new GroupPage());
+                }
+                else if (item.Title.Equals("Logs"))
+                {
+                    Detail = new NavigationPage(new LogsPage());
                 }
 
                 MenuListView.SelectedItem = null;
