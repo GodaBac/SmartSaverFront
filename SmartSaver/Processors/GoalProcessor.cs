@@ -17,17 +17,16 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await App.client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
+                response.EnsureSuccessStatusCode();
                     var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                     List<GoalDTO> listOfGoals = JsonConvert.DeserializeObject<List<GoalDTO>>(responseBody);
                     return listOfGoals;
-                }
+                
                 
             }
             catch (Exception ex)
             {
-                throw ex;
+                Logger.Log(string.Format("GetGoals: {0}", ex.ToString()));
             }
 
             return new List<GoalDTO>();
@@ -39,14 +38,12 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await App.client.DeleteAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
+                response.EnsureSuccessStatusCode();
                     return true;
-                }
             }
             catch (Exception ex)
             {
-                throw ex;
+                Logger.Log(string.Format("DeleteGoal: {0}", ex.ToString()));
             }
             return false;
         }
@@ -61,12 +58,12 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await App.client.SendAsync(message);
-                if (response.IsSuccessStatusCode)
+                response.EnsureSuccessStatusCode();
                     return true;
             }
             catch (Exception ex)
             {
-                throw ex;
+                Logger.Log(string.Format("ModifyGoal: {0}", ex.ToString()));
             }
              return false;
         }
@@ -79,14 +76,13 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await App.client.PostAsync("http://194.5.157.98:88/api/Goal", httpContent);
-                if (response.IsSuccessStatusCode)
-                {
+                response.EnsureSuccessStatusCode();
                     return true;
-                }
+                
             }
             catch (Exception ex)
             {
-                throw ex;
+                Logger.Log(string.Format("AddGoal: {0}", ex.ToString()));
             }
             return false;
         }
@@ -97,14 +93,12 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await App.client.DeleteAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
+                response.EnsureSuccessStatusCode();
                     return true;
-                }
             }
             catch (Exception ex)
             {
-                throw ex;
+                Logger.Log(string.Format("CompleteGoal: {0}", ex.ToString()));
             }
             return false;
         }
@@ -117,12 +111,12 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await App.client.SendAsync(message);
-                if (response.IsSuccessStatusCode)
+                response.EnsureSuccessStatusCode();
                     return true;
             }
             catch (Exception ex)
             {
-                throw ex;
+                Logger.Log(string.Format("GetSumExpensesByCategory: {0}", ex.ToString()));
             }
             return false;
         }
