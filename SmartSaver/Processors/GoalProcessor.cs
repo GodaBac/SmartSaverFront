@@ -14,23 +14,39 @@ namespace SmartSaver.Processors
         public async Task<List<GoalDTO>> GetGoals(string ownerId)
         {
             string url = string.Format("http://194.5.157.98:88/api/Goal?ownerId={0}", ownerId);
-            var response = await App.client.GetAsync(url);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                List<GoalDTO> listOfGoals = JsonConvert.DeserializeObject<List<GoalDTO>>(responseBody);
-                return listOfGoals;
+                var response = await App.client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    List<GoalDTO> listOfGoals = JsonConvert.DeserializeObject<List<GoalDTO>>(responseBody);
+                    return listOfGoals;
+                }
+                
             }
-            else return new List<GoalDTO>();
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return new List<GoalDTO>();
         }
 
         public async Task<bool> DeleteGoal(string goalId)
         {
             string url = string.Format("http://194.5.157.98:88/api/Goal/{0}", goalId);
-            var response = await App.client.DeleteAsync(url);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return true;
+                var response = await App.client.DeleteAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             return false;
         }
@@ -41,20 +57,36 @@ namespace SmartSaver.Processors
              string json = JsonConvert.SerializeObject(data);
              HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, "http://194.5.157.98:88/api/Goal");
              message.Content = new StringContent(json, Encoding.UTF8, "application/json");
-             var response = await App.client.SendAsync(message);
-             if (response.IsSuccessStatusCode)
-                 return true;
+
+            try
+            {
+                var response = await App.client.SendAsync(message);
+                if (response.IsSuccessStatusCode)
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
              return false;
         }
 
         public async Task<bool> AddGoal(NewGoalDTO data)
         {
             var json = JsonConvert.SerializeObject(data);
+            
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await App.client.PostAsync("http://194.5.157.98:88/api/Goal", httpContent);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return true;
+                var response = await App.client.PostAsync("http://194.5.157.98:88/api/Goal", httpContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             return false;
         }
@@ -62,10 +94,17 @@ namespace SmartSaver.Processors
         public async Task<bool> CompleteGoal(string goalId)
         {
             string url = string.Format("http://194.5.157.98:88/api/Goal/CompleteGoal/{0}", goalId);
-            var response = await App.client.DeleteAsync(url);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return true;
+                var response = await App.client.DeleteAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             return false;
         }
@@ -75,9 +114,16 @@ namespace SmartSaver.Processors
             string json = JsonConvert.SerializeObject(data);
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, "http://194.5.157.98:88/api/Goal/AddMoneyToGoal");
             message.Content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await App.client.SendAsync(message);
-            if (response.IsSuccessStatusCode)
-                return true;
+            try
+            {
+                var response = await App.client.SendAsync(message);
+                if (response.IsSuccessStatusCode)
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             return false;
         }
     }

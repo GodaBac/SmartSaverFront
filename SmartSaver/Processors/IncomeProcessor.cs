@@ -15,20 +15,34 @@ namespace SmartSaver.Processors
         {
             var json = JsonConvert.SerializeObject(data);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await App.client.PostAsync("http://194.5.157.98:88/api/Income", httpContent);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return true;
+                var response = await App.client.PostAsync("http://194.5.157.98:88/api/Income", httpContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             return false;
         }
         public async Task<bool> DeletIncome(string incomeId)
         {
             string url = string.Format("http://194.5.157.98:88/api/Income/{0}", incomeId);
-            var response = await App.client.DeleteAsync(url);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return true;
+                var response = await App.client.DeleteAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             return false;
         }
@@ -37,9 +51,16 @@ namespace SmartSaver.Processors
             string json = JsonConvert.SerializeObject(data);
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, "http://194.5.157.98:88/api/Income");
             message.Content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await App.client.SendAsync(message);
-            if (response.IsSuccessStatusCode)
-                return true;
+            try
+            {
+                var response = await App.client.SendAsync(message);
+                if (response.IsSuccessStatusCode)
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             return false;
         }
 

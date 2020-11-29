@@ -27,45 +27,73 @@ namespace SmartSaver.Processors
         {
             var json = JsonConvert.SerializeObject(data);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync("http://194.5.157.98:88/api/User", httpContent);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return true;
+                var response = await _client.PostAsync("http://194.5.157.98:88/api/User", httpContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             return false;
         }
 
         public async Task<User> UserLogin(string userEmail, string userPassword)
         {
-            string url = string.Format("http://194.5.157.98:88/api/User?email={0}&password={1}", userEmail, userPassword);
-            var response = await _client.GetAsync(url);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                User user = JsonConvert.DeserializeObject<User>(responseBody);
-                return user;
+                string url = string.Format("http://194.5.157.98:88/api/User?email={0}&password={1}", userEmail, userPassword);
+                var response = await _client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    User user = JsonConvert.DeserializeObject<User>(responseBody);
+                    return user;
+                }
             }
-            else return null;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return null;
         }
 
         public async Task<bool> ModifyUser(ModifyUserDTO data)
         {
-            string json = JsonConvert.SerializeObject(data);
-            HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, "http://194.5.157.98:88/api/User/ModifyUser");
-            message.Content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _client.SendAsync(message);
-            if (response.IsSuccessStatusCode)
-                return true;
+            try
+            {
+                string json = JsonConvert.SerializeObject(data);
+                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, "http://194.5.157.98:88/api/User/ModifyUser");
+                message.Content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await _client.SendAsync(message);
+                if (response.IsSuccessStatusCode)
+                    return true;
+            }
+            catch (Exception ex)
+            {
+
+            }
             return false;
         }
 
         public async Task<bool> DeleteUser(string userId)
         {
-            string url = string.Format("http://194.5.157.98:88/api/User/{0}", userId);
-            var response = await _client.DeleteAsync(url);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                return true;
+                string url = string.Format("http://194.5.157.98:88/api/User/{0}", userId);
+                var response = await _client.DeleteAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             return false;
         }
