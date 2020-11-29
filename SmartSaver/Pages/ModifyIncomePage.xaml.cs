@@ -71,7 +71,6 @@ namespace SmartSaver.Pages
         {
             if (NotifyParentEvent != null)
             {
-                //Raise Event. All the listeners of this event will get a call.
                 NotifyParentEvent();
             }
         }

@@ -21,6 +21,10 @@ namespace SmartSaver.Pages
         {
             InitializeComponent();
             inc = new IncomeProcessor();
+            cancelButton.Clicked += delegate (object sender, EventArgs args)
+            {
+                Application.Current.MainPage.Navigation.PopModalAsync();
+            };
 
            
         }
@@ -50,14 +54,9 @@ namespace SmartSaver.Pages
         {
             if (NotifyParentEvent != null)
             {
-                //Raise Event. All the listeners of this event will get a call.
                 NotifyParentEvent();
             }
         }
 
-        public void CancelButton_Clicked(object sender, EventArgs args)
-        {
-            Application.Current.MainPage.Navigation.PopModalAsync();
-        }
     }
 }

@@ -8,8 +8,7 @@
             <DatePicker MinimumDate="01/01/2018"
             MaximumDate="12/31/2023"
             Date="11/01/2020"
-            x:Name="datepicker"
-            DateSelected="DatePicker_DateSelected"/>
+            x:Name="datepicker"/>
             <microcharts:ChartView x:Name="chartViewPie" HeightRequest="300"/>
             <ListView x:Name="EntriesList" ItemsSource="{Binding Entries}" SeparatorVisibility="None"
                    Margin="20,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">

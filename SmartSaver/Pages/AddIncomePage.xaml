@@ -29,9 +29,10 @@
                 <Button Grid.Column="0"
                     Text="Add"
                     Clicked="AddButton_Clicked"/>
-                <Button Grid.Column="1"
-                    Text="Close"
-                    Clicked="CancelButton_Clicked"/>
+                <Button 
+                    x:Name="cancelButton"
+                    Grid.Column="1"
+                    Text="Close"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>
