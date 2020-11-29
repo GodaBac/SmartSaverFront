@@ -29,7 +29,7 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await client.PutAsync("http://194.5.157.98:88/api/Group/AddUserToGroup", stringContent);
-
+                response.EnsureSuccessStatusCode();
                 if (response != null)
                 {
                     return response.ToString();
@@ -38,7 +38,7 @@ namespace SmartSaver.Processors
             }
             catch (Exception ex)
             {
-                throw ex;
+                Logger.Log(string.Format("AddUserToGroup: {0}", ex.ToString()));
             }
 
             return "Unexpected error";
@@ -56,7 +56,7 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await client.PostAsync("http://194.5.157.98:88/api/Group", stringContent);
-
+                response.EnsureSuccessStatusCode();
                 if (response != null)
                 {
                     return response.ToString();
@@ -65,7 +65,7 @@ namespace SmartSaver.Processors
             }
             catch (Exception ex)
             {
-                throw ex;
+                Logger.Log(string.Format("CreateGroup: {0}", ex.ToString()));
             }
 
             return "Unexpected error";
@@ -79,6 +79,7 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await client.GetAsync(String.Format("http://194.5.157.98:88/api/Group/GetGroups?userId={0}", userId));
+                response.EnsureSuccessStatusCode();
                 //var responseInfo = response.GetAwaiter().GetResult();
                 if (response.IsSuccessStatusCode)
                 {
@@ -93,7 +94,7 @@ namespace SmartSaver.Processors
             }
             catch (Exception ex)
             {
-                throw ex;
+                Logger.Log(string.Format("GetGroups: {0}", ex.ToString()));
             }
 
             return new List<GroupDTO>();
@@ -106,6 +107,7 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await client.GetAsync(String.Format("http://194.5.157.98:88/api/Group/GetGroupUsers?groupId={0}", groupId));
+                response.EnsureSuccessStatusCode();
                 //var responseInfo = response.GetAwaiter().GetResult();
                 if (response.IsSuccessStatusCode)
                 {
@@ -120,7 +122,7 @@ namespace SmartSaver.Processors
             }
             catch (Exception ex)
             {
-                throw ex;
+                Logger.Log(string.Format("GetGroupUsers: {0}", ex.ToString()));
             }
 
             return new List<User>();
@@ -133,6 +135,7 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await client.DeleteAsync(String.Format("http://194.5.157.98:88/api/Group/RemoveGroup/{0}", groupId));
+                response.EnsureSuccessStatusCode();
                 if (response.IsSuccessStatusCode)
                 {
                     return "Success!";
@@ -140,8 +143,7 @@ namespace SmartSaver.Processors
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Logger.Log(string.Format("RemoveGroup: {0}", ex.ToString()));
             }
             return "Unexpected error";
         }
@@ -152,6 +154,7 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await client.DeleteAsync(String.Format("http://194.5.157.98:88/api/Group/RemoveUserFromGroup/{0}&{1}", userId, groupId));
+                response.EnsureSuccessStatusCode();
                 if (response.IsSuccessStatusCode)
                 {
                     return "Success!";
@@ -160,7 +163,7 @@ namespace SmartSaver.Processors
             catch (Exception ex)
             {
 
-                throw ex;
+                Logger.Log(string.Format("RemoveUserFromGroup: {0}", ex.ToString()));
             }
             return "Unexpected error";
         }
@@ -176,7 +179,7 @@ namespace SmartSaver.Processors
             try
             {
                 var response = await client.PutAsync("http://194.5.157.98:88/api/Group/ModifyGroup", stringContent);
-
+                response.EnsureSuccessStatusCode();
                 if (response != null)
                 {
                     return response.ToString();

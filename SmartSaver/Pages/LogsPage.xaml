@@ -4,8 +4,15 @@
              x:Class="SmartSaver.Pages.LogsPage">
     <ContentPage.Content>
         <StackLayout>
+            <ScrollView>
+                <StackLayout>
             <Label x:Name="message"
                 FontSize="12" />
+                    
+                </StackLayout>
+            </ScrollView>
+            <Button Text="Copy to clipboard!"
+                    Clicked="Button_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

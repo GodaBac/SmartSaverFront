@@ -18,6 +18,11 @@ namespace SmartSaver.Pages
         public delegate void NotifyParentDelegate();
         IncomeProcessor inc;
         ObservableCollection<IncomeDTO> incomes;
+        private Lazy<List<IncomeDTO>> _items = new Lazy<List<IncomeDTO>>();
+        public List<IncomeDTO> items
+        {
+            get { return _items.Value; }
+        }
         public ObservableCollection<IncomeDTO> Incomes { get { return incomes; } }
         public PageTwo()
         {
@@ -31,7 +36,9 @@ namespace SmartSaver.Pages
         private async void IncomeData()
         {
             int daysToShow = (DateTime.Now - datepicker.Date).Days;
-            var _incomes = await inc.GetIncomes(App.ownerId, daysToShow, -1);
+            
+
+            IEnumerable<IncomeDTO> _incomes = await inc.GetIncomes(App.ownerId, daysToShow, -1);
             Incomes.Clear();
             _incomes.Reverse();
             foreach (var income in _incomes)

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace SmartSaver.Pages
 {
@@ -18,6 +19,12 @@ namespace SmartSaver.Pages
         {
             InitializeComponent();
             message.Text = Message;
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await Clipboard.SetTextAsync(message.Text);
+            await DisplayAlert("", "Logs copied!", ":(");
         }
     }
 }

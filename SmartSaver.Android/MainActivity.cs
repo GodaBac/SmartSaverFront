@@ -30,4 +30,5 @@ namespace SmartSaver.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
 }
