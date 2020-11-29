@@ -21,6 +21,10 @@ namespace SmartSaver.Pages
         {
             gop = new GoalProcessor();
             InitializeComponent();
+            cancelButton.Clicked += delegate (object sender, EventArgs args)
+            {
+                Application.Current.MainPage.Navigation.PopModalAsync();
+            };
             
         }
 
@@ -54,15 +58,10 @@ namespace SmartSaver.Pages
             }
         }
 
-        private void CancelButton_Clicked(object sender, EventArgs e)
-        {
-            Application.Current.MainPage.Navigation.PopModalAsync();
-        }
         public void NotifyParent()
         {
             if (NotifyParentEvent != null)
-            {
-                //Raise Event. All the listeners of this event will get a call.
+            { 
                 NotifyParentEvent();
             }
         }

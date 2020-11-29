@@ -44,6 +44,10 @@ namespace SmartSaver.Pages
             exp = new ExpensesProcessor();
             entries = new ObservableCollection<EntryForList>();
             EntriesList.ItemsSource = entries;
+            datepicker.DateSelected += delegate (object sender, DateChangedEventArgs args)
+            {
+                ChartData();
+            };
             SelectedType = "Expenses by category";
             ChartData();
         }
@@ -77,9 +81,5 @@ namespace SmartSaver.Pages
             }
         }
 
-        public async void DatePicker_DateSelected (object sender, EventArgs args)
-        {
-            ChartData();
-        }
     }
 }

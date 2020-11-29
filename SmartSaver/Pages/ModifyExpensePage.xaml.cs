@@ -28,6 +28,12 @@ namespace SmartSaver.Pages
             int i = 0;
             categories = new List<Category>();
 
+            cancelButton.Clicked += delegate (object sender, EventArgs args)
+            {
+                Application.Current.MainPage.Navigation.PopModalAsync();
+            };
+
+
             foreach (var category in Enum.GetNames(typeof(CategoryEnum)))
             {
                 categories.Add(new Category { CategoryName = category, CategoryInt = i });
@@ -37,6 +43,7 @@ namespace SmartSaver.Pages
             this.modExpenseCategory.SelectedItem = selectedItem.Expensecategory;
             this.modMoneyUsed.Text = (selectedItem.Moneyused).ToString();
             this.modExpenseName.Text = selectedItem.Expensename;
+            
             
         }
 
@@ -63,11 +70,6 @@ namespace SmartSaver.Pages
                     await DisplayAlert("", "Expense info must be filled in!", "Ok");
                 }
             }
-        }
-
-        public void CancelButton_Clicked(object sender, EventArgs args)
-        {
-            Application.Current.MainPage.Navigation.PopModalAsync();
         }
 
 
