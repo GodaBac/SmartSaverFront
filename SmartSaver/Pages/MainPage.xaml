@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="SmartSaver.Pages.MainPage">
+             x:Class="SmartSaver.Pages.MainPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <Grid VerticalOptions="FillAndExpand">
         <Grid.RowDefinitions>
@@ -13,16 +14,21 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Image Source="back.png" Aspect="Fill" HeightRequest="300" VerticalOptions="StartAndExpand"/>
-        <StackLayout Orientation="Vertical" Margin="20,20" HorizontalOptions="Center" VerticalOptions="Center">
+        <Image Aspect="Fill" HeightRequest="200" VerticalOptions="StartAndExpand">
+            <Image.Source>
+                <FileImageSource File="{DynamicResource BackImage}"/>
+            </Image.Source>
+        </Image>
+        <Image Source="notsosmartsaver.png" HeightRequest="200" VerticalOptions="StartAndExpand"/>
+        <!--<StackLayout Orientation="Vertical" Margin="20,20" HorizontalOptions="Center" VerticalOptions="Center">
                 <Label Text="Welcome! This is Smart Saver" TextColor="Black" FontSize="34" VerticalOptions="Center" HorizontalOptions="Center"/>
                 <Label Text="Manage your money" TextColor="Black" FontSize="16" HorizontalOptions="Center"/>
                 <Label Text="Achieve all your financial goals" TextColor="Black" FontSize="12" HorizontalOptions="Center"/>
-            </StackLayout>
+            </StackLayout>-->
             <Frame Grid.Row="1" HasShadow="True" CornerRadius="10" Margin="20,-40,20,0" Padding="0" HeightRequest="120" VerticalOptions="Start">
             <Label x:Name="yourMoney" Text="Your money: $}" TextColor="Black" FontSize="20" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
         </Frame>
-            <StackLayout Grid.Row="2" BackgroundColor="Transparent" Orientation="Horizontal" Margin="20" HorizontalOptions="End">
+        <StackLayout Grid.Row="2" BackgroundColor="{DynamicResource PageBackgroundColor}" Orientation="Horizontal" Margin="20" HorizontalOptions="End">
                 <Label Text="Last five expenses" TextColor="Black" FontSize="14" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
         <Grid Grid.Row="3">
@@ -35,7 +41,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate >
                         <ViewCell>
-                            <Frame BackgroundColor="White" BorderColor="#F0F0F0" Padding="5" Margin="0,0,0,5" HasShadow="False">
+                            <Frame BackgroundColor="Transparent" BorderColor="#F0F0F0" Padding="5" Margin="0,0,0,5" HasShadow="False">
                                 <Grid HeightRequest="50" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -56,7 +62,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate >
                         <ViewCell>
-                            <Frame BackgroundColor="White" BorderColor="#F0F0F0" Padding="5" Margin="0,0,0,5" HasShadow="False">
+                            <Frame BackgroundColor="Transparent" BorderColor="#F0F0F0" Padding="5" Margin="0,0,0,5" HasShadow="False">
                                 <Grid HeightRequest="50" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>

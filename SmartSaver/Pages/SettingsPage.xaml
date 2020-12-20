@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:SmartSaver.Controls"
+             x:Class="SmartSaver.Pages.SettingsPage">
+    <Grid VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image Source="back.png" Aspect="Fill" HeightRequest="100" VerticalOptions="StartAndExpand"/>
+        <StackLayout Orientation="Vertical" Margin="20,20" HorizontalOptions="Center" VerticalOptions="Center">
+            <Label Text="Settings" TextColor="Black" FontSize="34" VerticalOptions="Center" HorizontalOptions="Center"/>
+        </StackLayout>
+        <!--<ListView x:Name="UserInformation">
+        </ListView>-->
+        <!--<controls:EnumPicker
+                          Title="Select Theme"
+                          SelectedIndexChanged="OnPickerSelectionChanged" />-->
+           
+        <TableView Intent="Settings" Margin="10, 0" Grid.Row="4">
+            <TableRoot Title="Title">
+                <TableSection>
+                    <SwitchCell x:Name="sw" Text="Theme" OnChanged="ThemeChanged" On="{Binding sw}"/>
+
+                </TableSection>
+            </TableRoot>
+
+        </TableView>
+    </Grid>
+</ContentPage>
