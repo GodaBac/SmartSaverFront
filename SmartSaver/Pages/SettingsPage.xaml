@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:SmartSaver.Controls"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartSaver.Pages.SettingsPage"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
     <Grid VerticalOptions="FillAndExpand">
@@ -11,35 +11,102 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Image Source="back.png" Aspect="Fill" HeightRequest="100" VerticalOptions="StartAndExpand"/>
-        <StackLayout Orientation="Vertical" Margin="20,20" HorizontalOptions="Center" VerticalOptions="Center">
-            <Label Text="Settings" TextColor="Black" FontSize="34" VerticalOptions="Center" HorizontalOptions="Center"/>
+        <Image Source="back.png" Aspect="Fill" HeightRequest="150" VerticalOptions="StartAndExpand"/>
+        <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
+            <Label Text="Settings" TextColor="Black" FontSize="34" HeightRequest="100" VerticalOptions="Center" HorizontalOptions="Center"/>
         </StackLayout>
-        <!--<ListView x:Name="UserInformation">
+
+        <!--<StackLayout Orientation="Horizontal" HeightRequest="200">
+            <Label Text="Theme" TextColor="Black" 
+                   LineBreakMode="WordWrap" FontSize="16" 
+                   VerticalOptions="Center" Grid.Row="2"/>
+            <Button Text="Light" 
+                    VerticalOptions="Center" HeightRequest="60" 
+                    Clicked="LightClicked" Grid.Row="3"/>
+            <Button Text="Dark" 
+                    VerticalOptions="Center" HeightRequest="60" 
+                    Clicked="DarkClicked" Grid.Row="4"/>
+        </StackLayout>-->
+
+        <Grid HeightRequest="200" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Margin="30, 30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Theme" Grid.Column="0" TextColor="Black" 
+                   LineBreakMode="WordWrap" FontSize="16" 
+                   VerticalOptions="Center" Grid.Row="2"/>
+            <Button Text="Light" Grid.Column="1" 
+                    VerticalOptions="Center" HeightRequest="60" 
+                    Clicked="LightClicked" Grid.Row="2"/>
+            <Button Text="Dark" Grid.Column="2" 
+                    VerticalOptions="Center" HeightRequest="60" 
+                    Clicked="DarkClicked" Grid.Row="2"/>
+        </Grid>
+
+        <!--<ListView x:Name="Themes" SeparatorVisibility="None" ListView.HasUnevenRows="True"
+                  Grid.Row="4" Margin="20,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <ViewCell>
+                        <Frame BackgroundColor="White" BorderColor="#F0F0F0" Padding="5" Margin="0,0,0,5" HasShadow="False">
+                            <Grid HeightRequest="70" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="Theme" Grid.Column="0" TextColor="Black" LineBreakMode="WordWrap" FontSize="16" VerticalOptions="Center"/>
+                                <Button Text="Light" Grid.Column="1" VerticalOptions="Center" HeightRequest="60" Clicked="LightClicked"></Button>
+                                <Button Text="Dark" Grid.Column="2" VerticalOptions="Center" HeightRequest="60" Clicked="DarkClicked"></Button>
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>-->
-        <!--<controls:EnumPicker
-                          Title="Select Theme"
-                          SelectedIndexChanged="OnPickerSelectionChanged" />-->
-        <ListView ItemsSource="{Binding Themes}" x:Name="ThemeListView" 
+        <!--<Label  Text="Theme" 
+                TextColor="Black" 
+                FontSize="16" 
+                VerticalOptions="End" 
+                HorizontalOptions="Center" 
+                Margin="0, 0, 0, -30" />
+        <ListView x:Name="ThemeListView" ItemsSource="{Binding Themes}"  
                   SeparatorVisibility="None" HasUnevenRows="true"
                   Grid.Row="3" Margin="20, 0"
-                  VerticalOptions="FillAndExpand" 
-                  SelectedItem="{Binding SelectedTheme, Mode=TwoWay}"
-                  BackgroundColor="{DynamicResource PageBackgroundColor}">
+                  VerticalOptions="FillAndExpand" >
+            --><!--SelectedItem="{Binding SelectedTheme, Mode=TwoWay}"-->
+                  <!--BackgroundColor="Transparent">--><!--
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+                        <Frame BackgroundColor="White" BorderColor="#F0F0F0" Padding="5" Margin="0,0,0,5" HasShadow="False">
+                            <Grid HeightRequest="70" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Text="Light" Grid.Column="1" VerticalOptions="Center" HeightRequest="60" Clicked="LightClicked"></Button>
+                                <Button Text="Dark" Grid.Column="2" VerticalOptions="Center" HeightRequest="60" Clicked="DarkClicked"></Button>
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                    --><!--<ImageCell Text="{Binding Title}" 
+                                       ImageSource="{Binding Icon}" 
+                                       TextColor="Black" />-->
+                    <!--<ViewCell>
                         <Grid Padding="15,10" VerticalOptions="Center">
-                            <Label Style="{StaticResource TitleLabelStyle}">
-                                <Label.FormattedText>
+                            
+                            <Label Text="{Binding Title}">
+                                --><!--<Label.FormattedText>
                                     <FormattedString>
-                                        <Span Text="{Binding Title}" />
-                                        <Span Style="{StaticResource SubLabelStyle}" />
+                                        <Span  TextColor="Black"/>
                                     </FormattedString>
-                                </Label.FormattedText>
+                                </Label.FormattedText>--><!--
                             </Label>
                             <BoxView
-                                BackgroundColor="{DynamicResource PrimaryColor}"
+                                BackgroundColor="Transparent"
                                 CornerRadius="10"
                                 HeightRequest="20"
                                 HorizontalOptions="End"
@@ -47,19 +114,9 @@
                                 VerticalOptions="Center"
                                 WidthRequest="20" />
                         </Grid>
-                    </ViewCell>
+                    </ViewCell>--><!--
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
-           
-        <!--<TableView Intent="Settings" Margin="10, 0" Grid.Row="4">
-            <TableRoot Title="Title">
-                <TableSection>
-                    <SwitchCell x:Name="sw" Text="Theme" OnChanged="ThemeChanged" On="{Binding sw}"/>
-
-                </TableSection>
-            </TableRoot>
-
-        </TableView>-->
+        </ListView>-->
     </Grid>
 </ContentPage>

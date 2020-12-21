@@ -1,6 +1,7 @@
 ﻿using SmartSaver.DTO.User.Output;
 using SmartSaver.Models;
 using SmartSaver.Processors;
+using SmartSaver.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,10 +9,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SmartSaver.Models;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using SmartSaver.Dependencies;
 
 namespace SmartSaver.Pages
 {
@@ -21,59 +22,27 @@ namespace SmartSaver.Pages
         UserProcessor usp;
         ObservableCollection<User> user;
         public delegate void NotifyParentDelegate();
-        ObservableObject ree = new ObservableObject();
+        
 
         public SettingsPage()
         {
             usp = new UserProcessor();
             user = new ObservableCollection<User>();
-
-            Themes = new List<AppTheme>()
-            {
-                new AppTheme() { ThemeId = ThemeManager.Themes.Light, Title = "Light Theme"},
-                new AppTheme() { ThemeId = ThemeManager.Themes.Dark, Title = "Dark Theme"},
-            };
-            var selectedTheme = Themes.FirstOrDefault(x => x.ThemeId == ThemeManager.CurrentTheme());
-            selectedTheme.IsSelected = true;
-
             InitializeComponent();
-        }
-        List<AppTheme> _themes;
-        public List<AppTheme> Themes
-        {
-            get { return _themes; }
-            set { ree.SetProperty(ref _themes, value); }
+            ThemeSelectionViewModel t = new ThemeSelectionViewModel();
         }
 
-        AppTheme _selectedTheme;
-        public AppTheme SelectedTheme
+        private void LightClicked(object sender, EventArgs e)
         {
-            get { return _selectedTheme; }
-            set
-            {
-                ree.SetProperty(ref _selectedTheme, value);
-                if (value != null) { OnThemeSelected(value); }
-            }
+            ThemeSelectionViewModel t = new ThemeSelectionViewModel();
+            AppTheme theme = new AppTheme(){ ThemeId = ThemeManager.Themes.Light, Title = "Light Theme" };
+            t.ThemeChosen(theme);
         }
-
-        /// <summary>
-        /// Invokes when you select any Theme from the ListView
-        /// </summary>
-        /// <param name="selectedTheme"></param>
-        private void OnThemeSelected(AppTheme selectedTheme)
+        private void DarkClicked(object sender, EventArgs e)
         {
-            foreach (var t in Themes)
-            {
-                t.IsSelected = t.ThemeId == selectedTheme.ThemeId;
-            }
-            ThemeManager.ChangeTheme(selectedTheme.ThemeId);
-
-            //For Android we need some Platform specific twicks for Android Toolbar. 
-            //Apply this platform specific change by invoking following DependencyService
-            if (Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.UWP)
-            {
-                DependencyService.Get<INativeServices>().OnThemeChanged(selectedTheme.ThemeId);
-            }
+            ThemeSelectionViewModel t = new ThemeSelectionViewModel();
+            AppTheme theme = new AppTheme() { ThemeId = ThemeManager.Themes.Dark, Title = "Dark Theme" };
+            t.ThemeChosen(theme);
         }
     }
 }

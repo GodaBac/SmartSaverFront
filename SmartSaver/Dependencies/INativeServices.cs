@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SmartSaver.Dependencies
 {
-    interface INativeServices
+    public interface INativeServices
     {
         void OnThemeChanged(ThemeManager.Themes theme);
     }
