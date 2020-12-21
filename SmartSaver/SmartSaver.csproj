@@ -23,7 +23,7 @@
     <Compile Update="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Themes\DarkTheme.xaml.cs">
+    <Compile Update="ThemesResources\DarkTheme.xaml.cs">
       <DependentUpon>DarkTheme.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -80,10 +80,10 @@
     <EmbeddedResource Update="Pages\ViewGoalPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Themes\DarkTheme.xaml">
+    <EmbeddedResource Update="ThemesResources\DarkTheme.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Themes\LightTheme.xaml">
+    <EmbeddedResource Update="ThemesResources\LightTheme.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

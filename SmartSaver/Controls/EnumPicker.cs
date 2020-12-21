@@ -7,7 +7,7 @@ namespace SmartSaver.Controls
     class EnumPicker : Picker
     {
         public static readonly BindableProperty EnumTypeProperty =
-            BindableProperty.Create(nameof(EnumType), typeof(Theme), typeof(EnumPicker),
+            BindableProperty.Create(nameof(EnumType), typeof(ThemeManager), typeof(EnumPicker),
                 propertyChanged: (bindable, oldValue, newValue) =>
                 {
                     EnumPicker picker = (EnumPicker)bindable;

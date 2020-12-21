@@ -164,6 +164,18 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\darkback.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\styles_app_themes.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\styles_toolbar_themes.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\styles_toolbarpopup_themes.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\attr.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

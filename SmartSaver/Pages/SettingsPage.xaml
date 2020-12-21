@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:SmartSaver.Controls"
-             x:Class="SmartSaver.Pages.SettingsPage">
+             x:Class="SmartSaver.Pages.SettingsPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
     <Grid VerticalOptions="FillAndExpand">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -19,8 +20,39 @@
         <!--<controls:EnumPicker
                           Title="Select Theme"
                           SelectedIndexChanged="OnPickerSelectionChanged" />-->
+        <ListView ItemsSource="{Binding Themes}" x:Name="ThemeListView" 
+                  SeparatorVisibility="None" HasUnevenRows="true"
+                  Grid.Row="3" Margin="20, 0"
+                  VerticalOptions="FillAndExpand" 
+                  SelectedItem="{Binding SelectedTheme, Mode=TwoWay}"
+                  BackgroundColor="{DynamicResource PageBackgroundColor}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="15,10" VerticalOptions="Center">
+                            <Label Style="{StaticResource TitleLabelStyle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Title}" />
+                                        <Span Style="{StaticResource SubLabelStyle}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <BoxView
+                                BackgroundColor="{DynamicResource PrimaryColor}"
+                                CornerRadius="10"
+                                HeightRequest="20"
+                                HorizontalOptions="End"
+                                IsVisible="{Binding IsSelected, Mode=TwoWay}"
+                                VerticalOptions="Center"
+                                WidthRequest="20" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
            
-        <TableView Intent="Settings" Margin="10, 0" Grid.Row="4">
+        <!--<TableView Intent="Settings" Margin="10, 0" Grid.Row="4">
             <TableRoot Title="Title">
                 <TableSection>
                     <SwitchCell x:Name="sw" Text="Theme" OnChanged="ThemeChanged" On="{Binding sw}"/>
@@ -28,6 +60,6 @@
                 </TableSection>
             </TableRoot>
 
-        </TableView>
+        </TableView>-->
     </Grid>
 </ContentPage>

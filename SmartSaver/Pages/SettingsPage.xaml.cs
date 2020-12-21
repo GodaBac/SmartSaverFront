@@ -1,6 +1,6 @@
 ﻿using SmartSaver.DTO.User.Output;
+using SmartSaver.Models;
 using SmartSaver.Processors;
-using SmartSaver.Themes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SmartSaver.Dependencies;
 
 namespace SmartSaver.Pages
 {
@@ -20,54 +21,59 @@ namespace SmartSaver.Pages
         UserProcessor usp;
         ObservableCollection<User> user;
         public delegate void NotifyParentDelegate();
+        ObservableObject ree = new ObservableObject();
 
         public SettingsPage()
         {
-            InitializeComponent();
             usp = new UserProcessor();
             user = new ObservableCollection<User>();
+
+            Themes = new List<AppTheme>()
+            {
+                new AppTheme() { ThemeId = ThemeManager.Themes.Light, Title = "Light Theme"},
+                new AppTheme() { ThemeId = ThemeManager.Themes.Dark, Title = "Dark Theme"},
+            };
+            var selectedTheme = Themes.FirstOrDefault(x => x.ThemeId == ThemeManager.CurrentTheme());
+            selectedTheme.IsSelected = true;
+
+            InitializeComponent();
+        }
+        List<AppTheme> _themes;
+        public List<AppTheme> Themes
+        {
+            get { return _themes; }
+            set { ree.SetProperty(ref _themes, value); }
         }
 
-        void ThemeChanged(object sender, EventArgs e)
+        AppTheme _selectedTheme;
+        public AppTheme SelectedTheme
         {
-            ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
-            if(mergedDictionaries != null)
+            get { return _selectedTheme; }
+            set
             {
-                mergedDictionaries.Clear();
-                if(e.Equals(false))
-                {
-                    mergedDictionaries.Add(new LightTheme());
-                    sw.On = true;
-                }
-                else
-                {
-                    mergedDictionaries.Add(new DarkTheme());
-                    sw.On = false;
-                }
-            }
-        }
-        void OnPickerSelectionChanged(object sender, EventArgs e)
-        {
-            Picker picker = sender as Picker;
-            Theme theme = (Theme)picker.SelectedItem;
-
-            ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
-            if (mergedDictionaries != null)
-            {
-                mergedDictionaries.Clear();
-
-                switch (theme)
-                {
-                    case Theme.Dark:
-                        mergedDictionaries.Add(new DarkTheme());
-                        break;
-                    case Theme.Light:
-                    default:
-                        mergedDictionaries.Add(new LightTheme());
-                        break;
-                }
+                ree.SetProperty(ref _selectedTheme, value);
+                if (value != null) { OnThemeSelected(value); }
             }
         }
 
+        /// <summary>
+        /// Invokes when you select any Theme from the ListView
+        /// </summary>
+        /// <param name="selectedTheme"></param>
+        private void OnThemeSelected(AppTheme selectedTheme)
+        {
+            foreach (var t in Themes)
+            {
+                t.IsSelected = t.ThemeId == selectedTheme.ThemeId;
+            }
+            ThemeManager.ChangeTheme(selectedTheme.ThemeId);
+
+            //For Android we need some Platform specific twicks for Android Toolbar. 
+            //Apply this platform specific change by invoking following DependencyService
+            if (Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.UWP)
+            {
+                DependencyService.Get<INativeServices>().OnThemeChanged(selectedTheme.ThemeId);
+            }
+        }
     }
 }
