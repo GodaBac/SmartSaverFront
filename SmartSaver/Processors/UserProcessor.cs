@@ -84,6 +84,24 @@ namespace SmartSaver.Processors
             }
             return false;
         }
+        //public async Task<bool> ChangeUserPassword(ChangePasswordDTO data)
+        //{
+        //    try
+        //    {
+        //        string json = JsonConvert.SerializeObject(data);
+        //        HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, "http://194.5.157.98:88/api/User/ModifyUser");
+        //        message.Content = new StringContent(json, Encoding.UTF8, "application/json");
+        //        var response = await _client.SendAsync(message);
+        //        response.EnsureSuccessStatusCode();
+        //        if (response.IsSuccessStatusCode)
+        //            return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger.Log(string.Format("ModifyUser: {0}", ex.ToString()));
+        //    }
+        //    return false;
+        //}
 
         public async Task<bool> DeleteUser(string userId)
         {

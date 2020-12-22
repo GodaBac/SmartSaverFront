@@ -17,7 +17,6 @@ namespace SmartSaver.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
-
         private readonly Regex passwordRegex = new Regex(@"^(?=(.*\d){1})(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z\d]).{8,}$");
         public RegisterPage()
         {
