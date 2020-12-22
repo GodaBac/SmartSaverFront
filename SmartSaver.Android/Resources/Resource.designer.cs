@@ -8404,13 +8404,19 @@ namespace SmartSaver.Droid
 			public const int notify_panel_notification_icon_bg = 2131165315;
 			
 			// aapt resource value: 0x7F070084
-			public const int plus = 2131165316;
+			public const int notsosmartsaver = 2131165316;
 			
 			// aapt resource value: 0x7F070085
-			public const int tooltip_frame_dark = 2131165317;
+			public const int plus = 2131165317;
 			
 			// aapt resource value: 0x7F070086
-			public const int tooltip_frame_light = 2131165318;
+			public const int settings = 2131165318;
+			
+			// aapt resource value: 0x7F070087
+			public const int tooltip_frame_dark = 2131165319;
+			
+			// aapt resource value: 0x7F070088
+			public const int tooltip_frame_light = 2131165320;
 			
 			static Drawable()
 			{
@@ -9376,6 +9382,9 @@ namespace SmartSaver.Droid
 			
 			// aapt resource value: 0x7F0C0002
 			public const int launcher_foreground = 2131492866;
+			
+			// aapt resource value: 0x7F0C0003
+			public const int notsosmartIcon = 2131492867;
 			
 			static Mipmap()
 			{
