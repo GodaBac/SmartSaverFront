@@ -19,6 +19,7 @@ namespace SmartSaver.Pages
         {
             InitializeComponent();
         }
+
         //private async void SaveClicked(object sender, EventArgs e)
         //{
         //    if (CurrentPassword.Text == null)
@@ -27,7 +28,7 @@ namespace SmartSaver.Pages
         //    }
         //    else
         //    {
-        //        if(CurrentPassword.Text == App.user.Userpassword)
+        //        if (CurrentPassword.Text == App.user.Userpassword)
         //        {
         //            if (password.Text != null && repeatedPassword.Text != null)
         //            {
@@ -36,8 +37,8 @@ namespace SmartSaver.Pages
 
         //                    if (await App._userProcessor.ChangeUserPassword(new ChangePasswordDTO { userId = App.user.Userid, userNewPassword = password.Text }))
         //                    {
-        //                        await DisplayAlert("", "User created successfully!", "Ok");
-        //                        App.Current.MainPage = new LoginPage();
+        //                        await DisplayAlert("", "Password changed successfully!", "Ok");
+        //                        App.Current.MainPage = new SettingsPage();
         //                    }
         //                }
 
